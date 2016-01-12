@@ -1,4 +1,4 @@
-****---
+---
 layout: post
 title:  "make git page with jekyll"
 date:   2016-01-12 10:05:16 +0900
