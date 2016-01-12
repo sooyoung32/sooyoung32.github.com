@@ -2,7 +2,9 @@
 layout: post
 title:  "리눅스 파일시스템과 하드 마운트하기 (Mount Hard drive to File System)"
 date:   2015-01-12
-categories: unbuntu linux file system
+author: Sooyoung
+categories: dev
+tags:linux mount usb file-system
 ---
 
 
