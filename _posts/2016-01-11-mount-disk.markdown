@@ -1,13 +1,12 @@
 ---
 layout: post
-title:  "리눅스 파일시스템과 하드 마운트하기 (Mount Hard drive to File System)"
-date:   2015-01-12
+title:  "Ubuntu Disk Mount (auto-mount)!"
+date:   2016-01-12 13:30:59
 author: Sooyoung
 categories: dev
-tags:linux mount usb file-system
+tags: dev linux ubuntu 
+cover:  "/assets/instacode.png"
 ---
-
-
 
 ## 리눅스 파일시스템과 하드 마운트하기 (Mount Hard drive to File System)
 
