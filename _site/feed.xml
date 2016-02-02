@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lucky You!</title>
+    <description>A simple yet classy theme for your Jekyll website or blog.
+</description>
+    <link>http://sooyoung32.github.io/</link>
+    <atom:link href="http://sooyoung32.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Tue, 02 Feb 2016 15:25:56 +0900</pubDate>
+    <lastBuildDate>Tue, 02 Feb 2016 15:25:56 +0900</lastBuildDate>
+    <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>Lucene 기본개념 (번역)</title>
+        <description>&lt;h2 id=&quot;lucene&quot;&gt;Lucene&lt;/h2&gt;
+
+&lt;p&gt;다음은 &lt;a href=&quot;http://www.lucenetutorial.com/basic-concepts.html&quot;&gt;Lucene Tutorial.com&lt;/a&gt;에서 설명한 루신 기본 개념 부분을 번역한 것입니다. 미흡한 부분이 있는점 미리 양해 부탁드립니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;basic-concept--&quot;&gt;Basic Concept 기본 개념&lt;/h3&gt;
+
+&lt;p&gt;우리의 웹사이트나 어플리케이션에 검색 기능을 쉽게 붙일 수 있는 루신은 자바로 만들어진 full-text 검색 라이브러리입니다.&lt;/p&gt;
+
+&lt;p&gt;루신은 content(내용)을 full-text index에 더함으로서 동작 됩니다. 루신은  당신이 그 인덱스에 쿼리를 수행할수 있게 해주고, 그 쿼리에 연관된 것들에 순위을 매겨 결과값을 리턴하거나, 문서의 마지막으루 수정된 날짜 순과 같은 특정 분야를 기준으로 정렬 해서 결과값을 리턴하기도 합니다.&lt;/p&gt;
+
+&lt;p&gt;당신이 루신에 추가하는 컨텐츠는 SQL,NoSQL DB, 파일시스템, 또는 웹사이트와 같이 다양한 곳으로 부터 올 수 있습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;searching-and-indexing--&quot;&gt;Searching and Indexing (검색과 생인)&lt;/h3&gt;
+&lt;p&gt;루신은 빠른 검색 응답(fast search response)을 성취할 수 있습니다. 왜냐하면 텍스트를 직접적으로 검색하는 대신에 루신은 인덱스로 검색하기 때문입니다. 이것은 책의 맨 마지막에 색인을 이용해 관련된 키워드를 검색해 페이지를 찾는 것과 같다고 볼 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;인덱스의 타입을 **inverted index(도치된 색인) **라고 부릅니다. 왜냐하면 이것은 페이지 중심적인 데이타 구조 (page-&amp;gt;word)를 키워드 중심적인 데이타 구조(word-&amp;gt;pages)로 도치시키기 때문입니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;document-&quot;&gt;Document (문서)&lt;/h3&gt;
+&lt;p&gt;루씬에서는 하나의 Document는 Searching과 Index의 단위입니다. (In Lucene, a Document is the unit of search and index.) 하나의 Index 는 하나 또는 그 이상의 Document로 구성되어 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Indexing(색인작업)은 여러 Documents 를 indexWriter에 추가하는 작업과 IndexSearcher를 통해서 Index로부터 Documents 를 가져오는 일을 포합합니다.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;하나의 루씬 Document는 꼭 영어로된 (English usage of the word) document일 필요가 없습니다. 예를 들어 만약 사용자들이 있는 데이터베이스 테이블에서 루신 Index를 만들고 싶다면, 각 사용자들은 루씬의 Document 로써 그 인덱스에 표기되어 있습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;fields-&quot;&gt;Fields (분야)&lt;/h3&gt;
+&lt;p&gt;하나의 Document는 하나의 또는 그 이상의 Fields로 구성되어 있습니다. 하나의 Field는 단순한 namd-value (이름과 값)으로 된 쌍입니다. 예를들어 흔히 어플리케이션에서 사용되는 하나의 Field는 &lt;em&gt;title&lt;/em&gt; 입니다. &lt;em&gt;title&lt;/em&gt; Field의 경우, field 이름은 &lt;em&gt;title&lt;/em&gt;이고, 값은 그 내용의 제목이 됩니다. (&lt;em&gt;title&lt;/em&gt;이란 이름으로 된 값)&lt;/p&gt;
+
+&lt;p&gt;루씬에서 Indexing은 Fields로 구성되어있는 Documents를 만드는 것과, 이러한 Documents를 IndexWriter에 추가하는 것을 포함합니다&lt;/p&gt;
+
+&lt;h3 id=&quot;searching-&quot;&gt;Searching (검색)&lt;/h3&gt;
+&lt;p&gt;Searching(검색작업)에는 이미 만들어진 index가 필요합니다. Searching(검색작업)은 쿼리를 만들고 (일반적으로 QueryParser를 통해서) 이 쿼리를 Hits의 리스트를 반환하는 &lt;strong&gt;IndexSearcher&lt;/strong&gt;에게 전해주는 일을 포합합니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;queries-&quot;&gt;Queries (쿼리)&lt;/h3&gt;
+&lt;p&gt;루씬은 검색을 수행하는데 있어 루씬 고유의 Mini-languge를 가지고 있습니다. 더 자세한 정보를 위해서 &lt;a href=&quot;http://www.lucenetutorial.com/lucene-query-syntax.html&quot;&gt;Lucene Query Syntax&lt;/a&gt; 를 읽어 주세요.&lt;/p&gt;
+
+&lt;p&gt;Lucene Query Language 는 사용자가 검색을 위해 어떤 Field(s)를 사용할지, 어떤 Field(s)에 더 중접을 둘지, Boolean qeury(AND, OR,NOT)의 수행할수 있는 능력, 그 밖에 다른 기능들을 사용할수 있게 해줍니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;5분만에 루씬 경험하기&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-java&quot;&gt;public class FiveMinLuceneTest {
+    public static void main(String[] args) throws IOException, ParseException {
+        /*
+         1. Index : 간단한 예제를 위해 우리는 몇개의 String으로부터  In-memory 인덱스를 생성합니다.
+         */
+        StandardAnalyzer analyzer = new StandardAnalyzer();
+        Directory index = new RAMDirectory();
+        IndexWriterConfig config = new IndexWriterConfig(analyzer);
+
+        IndexWriter writer = new IndexWriter(index, config);
+        addDoc(writer, &quot;Lucene in Action&quot;, &quot;193398817&quot;);
+        addDoc(writer, &quot;Lucene for Dummies&quot;, &quot;55320055Z&quot;);
+        addDoc(writer, &quot;Managing Gigabytes&quot;, &quot;55063554A&quot;);
+        addDoc(writer, &quot;The Art of Computer Science&quot;, &quot;9900333X&quot;);
+        writer.close();
+
+        /*
+            2. Query : stdin으로 부터 쿼리를 읽고 parse 후 이것의 밖으로 루씬 쿼리를 build 합니다/
+         */
+        String queryStr = args.length &amp;gt; 0 ? args[0] :  &quot;lucene&quot;;
+
+        //&quot;title&quot; 값은 만약 쿼리에 field가 명시되지 않았다면 초기값으로 사용됩니다.
+        Query query = new QueryParser(&quot;title&quot;, analyzer).parse(queryStr);
+
+        /*
+            3. Search : 쿼리를 사용하여 우리는 index를 검색하기 위한 Searcher를 만듭니다
+            그리고 TopScoreDocCollector는 hits가 많은 순으로 탑10 을 수집하기 위해 초기화 합니다.
+         */
+        int hitsPerpage = 10;
+        IndexReader reader = DirectoryReader.open(index);
+        IndexSearcher searcher = new IndexSearcher(reader);
+        TopDocs docs =searcher.search(query, hitsPerpage);
+        ScoreDoc[] hits = docs.scoreDocs;
+
+
+        // 4.Display : 이제 우리는 우리가 만든 searcher 로부터 결과를 얻었고 그 결과를 사용자에게 보여줍니다.
+        System.out.println(&quot;Found : &quot;+ hits.length+ &quot; hits.&quot;);
+        for (int i = 0; i &amp;lt; hits.length ; ++i) {
+            int docId = hits[i].doc;
+            Document document = searcher.doc(docId);
+            System.out.println((i+1) + &quot;.  &quot;+ document.get(&quot;isbn&quot;) + &quot;\t&quot;+ document.get(&quot;title&quot;));
+        }
+        // reader는 더이상 Documents에 접근할 필요가 없을때 닫혀야만 합니다.
+        reader.close();
+
+    }
+
+    /*
+        addDoc()은 실제로 Documents를 index에 무엇을 추가할것지를 수행하는 함수입니다.
+        우리가 tokenized 하기 원하는 내용의 TextField의 사용과, tokenized 를 원하지 않는 id Field에 StringField의 사용에
+        주목해주세요.
+     */
+    private static void addDoc(IndexWriter writer, String title, String isbn) throws IOException {
+        Document document = new Document();
+
+        document.add(new TextField(&quot;title&quot;, title, Field.Store.YES));
+        document.add(new StringField(&quot;isbn&quot;, isbn, Field.Store.YES));
+        writer.addDocument(document);
+
+    }
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+</description>
+        <pubDate>Tue, 02 Feb 2016 00:00:00 +0900</pubDate>
+        <link>http://sooyoung32.github.io/dev/2016/02/02/lucene-basic-concept.html</link>
+        <guid isPermaLink="true">http://sooyoung32.github.io/dev/2016/02/02/lucene-basic-concept.html</guid>
+        
+        <category>dev</category>
+        
+        <category>lucene</category>
+        
+        
+        <category>dev</category>
+        
+      </item>
+    
+      <item>
+        <title>Ubuntu Disk Mount (auto-mount)!</title>
+        <description>&lt;h2 id=&quot;mount-hard-drive-to-file-system&quot;&gt;리눅스 파일시스템과 하드 마운트하기 (Mount Hard drive to File System)&lt;/h2&gt;
+
+&lt;h4 id=&quot;format-your-hard-disk&quot;&gt;하드 디스크 포맷 (Format your Hard disk)&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;
+Setting - disks
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;make-directory-to-mount&quot;&gt;마운트 할 디렉토리 설정 (Make directory to mount)&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;
+$ sudo mkdir /newHard
+$ sudo chown userId:userGroup /경로(directory location)
+$ sudo chmod 775 /newHard
+//하위 폴더에도 같은 권한 주기
+$ sudo chown -R
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;ext-dist-usb--mount&quot;&gt;외장 디스크(ext dist, usb) 마운트하기 (mount)&lt;/h4&gt;
+
+&lt;p&gt;disks를 통해 현재 등록된 하드를 확인한다. 등록하고 싶은 하드 디바이스를 확인하다. ex) /dev/sda1 , Ext4..&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ sudo mount -t 파일시스템(ex4, utfs, vfat..) 하드 디바이스 마운트할 위치
+$ sudo mount -t ext4 /dev/sd? /newHard
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;reference : http://blog.naver.com/pjfile/50116292104&lt;/p&gt;
+
+&lt;h4 id=&quot;section&quot;&gt;하드디스크 자동마운트하기&lt;/h4&gt;
+&lt;p&gt;disks를 통해 현재 등록된 하드를 확인한다. 등록하고 싶은 하드 디바이스를 확인하다. ex) /dev/sda1 , Ext4..&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;현재 자동마운트 하려는 disk의 uuid를 기억한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ ls -l /dev/disk/by-uuid
+&lt;/code&gt;
+*  vi를 통해 자동마운트할 디스크 설정을 적어둔다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+$ sudo /etc/fstab
+&lt;/code&gt;
+*  UUID = disk uid,  disk마운트 될 위치 파일, 파티션의 파일시스템 종류(ext4, ftfs, vfat, auto..) , 옵션 (부팅시 자동마운트 할 것인지, 제한된 사용자가 파일시스템을 마운트 할수 있는지..), Dump (0이 아닌값은 파일세스템이 백업 되어야 함, 0 은 백업이 없음을 말한다.), Pass(fsck옵션. 어떤 파일시스템이 체크되어야 하는지 순서 확인. 파일시스템이 체크되지 않을것을 의미 0)&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;vi
+UUID=1a8ee29e-6ba1-4521-877d-d70ebc39f606   /media/disk   ntfs   defaults   0   0
+&lt;/code&gt;
+위의 설정을 fstab에 vi를 열어 추가하면 끝!!!!&lt;/p&gt;
+
+&lt;p&gt;ref : http://hyoungx.tistory.com/26&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 12 Jan 2016 22:30:59 +0900</pubDate>
+        <link>http://sooyoung32.github.io/dev/2016/01/12/mount-disk.html</link>
+        <guid isPermaLink="true">http://sooyoung32.github.io/dev/2016/01/12/mount-disk.html</guid>
+        
+        <category>dev</category>
+        
+        <category>linux</category>
+        
+        <category>ubuntu</category>
+        
+        
+        <category>dev</category>
+        
+      </item>
+    
+      <item>
+        <title>Welcome to Jekyll!</title>
+        <description>&lt;p&gt;You’ll find this post in your &lt;code&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;h2 id=&quot;adding-new-posts&quot;&gt;Adding New Posts&lt;/h2&gt;
+
+&lt;p&gt;To add new posts, simply add a file in the &lt;code&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;h3 id=&quot;tags-and-categories&quot;&gt;Tags and Categories&lt;/h3&gt;
+
+&lt;p&gt;If you list one or more categories or tags in the front matter of your post, they will be included with the post on the page as links. Clicking the link will bring you to an auto-generated archive page for the category or tag, created using the &lt;a href=&quot;https://github.com/jekyll/jekyll-archives&quot;&gt;jekyll-archive&lt;/a&gt; gem.&lt;/p&gt;
+
+&lt;h3 id=&quot;cover-images&quot;&gt;Cover Images&lt;/h3&gt;
+
+&lt;p&gt;To add a cover image to your post, set the “cover” property in the front matter with the relative URL of the image (i.e. &lt;code&gt;cover: &quot;/assets/cover_image.jpg&quot;&lt;/code&gt;).&lt;/p&gt;
+
+&lt;h3 id=&quot;code-snippets&quot;&gt;Code Snippets&lt;/h3&gt;
+
+&lt;p&gt;You can use &lt;a href=&quot;https://highlightjs.org/&quot;&gt;highlight.js&lt;/a&gt; to add syntax highlig code snippets:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;hljs javascript&quot;&gt;function demo(string, times) {
+  for (var i = 0; i &amp;lt; times; i++) {
+    console.log(string);
+  }
+}
+demo(&quot;hello, world!&quot;, 10);&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;images&quot;&gt;Images&lt;/h3&gt;
+
+&lt;p&gt;Lightbox has been enabled for images. To create the link that’ll launch the lightbox, add &lt;code&gt;data-lightbox&lt;/code&gt; and &lt;code&gt;data-title&lt;/code&gt; attributes to an &lt;code&gt;&amp;lt;a&amp;gt;&lt;/code&gt; tag around your &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt; tag. The result is:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;//bencentra.com/assets/images/falcon9_large.jpg&quot; data-lightbox=&quot;falcon9-large&quot; data-title=&quot;Check out the Falcon 9 from SpaceX&quot;&gt;
+  &lt;img src=&quot;//bencentra.com/assets/images/falcon9_small.jpg&quot; title=&quot;Check out the Falcon 9 from SpaceX&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;For more information, check out the &lt;a href=&quot;http://lokeshdhakar.com/projects/lightbox2/&quot;&gt;Lightbox&lt;/a&gt; website.&lt;/p&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://github.com/jekyll/jekyll-help&quot;&gt;Jekyll’s dedicated Help repository&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 18 Apr 2015 17:43:59 +0900</pubDate>
+        <link>http://sooyoung32.github.io/jekyll/2015/04/18/welcome-to-jekyll.html</link>
+        <guid isPermaLink="true">http://sooyoung32.github.io/jekyll/2015/04/18/welcome-to-jekyll.html</guid>
+        
+        <category>jekyll</category>
+        
+        <category>welcome</category>
+        
+        
+        <category>jekyll</category>
+        
+      </item>
+    
+  </channel>
+</rss>

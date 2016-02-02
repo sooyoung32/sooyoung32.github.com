@@ -45,13 +45,10 @@ ga_tracking_id: "UA-72571273-1"
 
 # Category descriptions (for archive pages)
 descriptions:
-  - cat: jekyll
+  - cat: Jekyll
     desc: "Posts describing Jekyll setup techniques."
 
-  - cat: dummy
-    desc: "Just some placeholder posts, lorem ipsum and the rest."
-
-  - cat: dev
+  - cat: Dev
     desc: "dev posts"
 
 # Social icons and sharing options
