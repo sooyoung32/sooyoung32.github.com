@@ -3,8 +3,8 @@ layout: post
 title:  "Lucene 기본개념 (번역)"
 date:   2016-02-02
 author: Sooyoung
-categories: dev
-tags: dev lucene 
+categories: Dev
+tags: dev lucene
 cover:  "/assets/img/lucene.png"
 ---
 
