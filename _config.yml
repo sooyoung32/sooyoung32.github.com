@@ -12,7 +12,7 @@ subtitle: "Sooyoung's dev & others blog"
 email: sooyoung32@gmail.com
 name: Sooyoung Park
 description: > 
-  A simple yet classy theme for your Jekyll website or blog.
+ This is  Sooyoung Park's dev & others blog. Thank you for visiting here.
 # Base URL of site (i.e. /blog). It should always start with a slash,
 # and never end with a slash. Set it to a blank value if hosting at the
 # root of your server.
@@ -25,7 +25,7 @@ logo: "/assets/logo.png"
 markdown: kramdown
 paginate: 5
 paginate_path: "/page:num/"
-inter_post_navigation: false
+inter_post_navigation: true
 
 # Archive settings (see https://github.com/jekyll/jekyll-archives/)
 jekyll-archives: 
@@ -45,10 +45,10 @@ ga_tracking_id: "UA-72571273-1"
 
 # Category descriptions (for archive pages)
 descriptions:
-  - cat: Jekyll
-    desc: "Posts describing Jekyll setup techniques."
+  - cat: movie
+    desc: "movie posts"
 
-  - cat: Dev
+  - cat: dev
     desc: "dev posts"
 
 # Social icons and sharing options
@@ -69,7 +69,7 @@ descriptions:
 social:
   - name: Twitter
     icon: twitter
-    username: TheBenCentra
+    username: Sooyoung Park
     url: https://twitter.com/sooyoung32
     desc: Follow me on Twitter
     share: true
@@ -93,14 +93,14 @@ social:
     username: sooyoung32
     url: https://www.linkedin.com/pub/ben-centra/47/769/60a
     desc: Connect with me on LinkedIn
-    share: true
+    share: false
 
   - name: Google+
     icon: google-plus
     username: 
     url: 
     desc: Add me to your Circles
-    share: true
+    share: false
 
   - name: YouTube
     icon: youtube
@@ -121,7 +121,7 @@ social:
     username: 
     url: 
     desc: Follow me on Pinterest
-    share: true
+    share: false
 
   - name: SoundCloud
     icon: soundcloud
@@ -170,7 +170,7 @@ social:
     username:
     url:
     desc: Share to Reddit
-    share: true
+    share: false
 
 # Social sharing protocols
 # These are for automatically generating sharing metadata for FB and Twitter

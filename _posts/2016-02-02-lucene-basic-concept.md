@@ -114,3 +114,7 @@ public class FiveMinLuceneTest {
 ~~~
 
 
+### ref
+* [dev 용식님의 루씬으로 검색엔진 개발하기](http://devyongsik.tistory.com/335) : 아주 쉽게 설명이 되어있습니다! dev 용식님 감사합니다.
+
+
