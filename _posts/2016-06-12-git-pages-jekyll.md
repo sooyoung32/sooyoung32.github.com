@@ -5,7 +5,7 @@ date:   2016-06-12
 author: Sooyoung
 categories: dev
 tags: jekyll bolg
-cover:  "/assets/img/jekyll.png"
+cover:  "/assets/img/git.png"
 ---
 
 ## Jekyll & git-page 연동법
